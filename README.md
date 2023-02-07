@@ -1,4 +1,18 @@
-# Simgenes - Simulate and create random genes
+# Simgenes 
+
+Pipeline to simulate and create random genes with selected features.
+
+[![Simgenes - Python package](https://github.com/celiosantosjr/simgenes/actions/workflows/python-package.yml/badge.svg)](https://github.com/celiosantosjr/simgenes/actions/workflows/python-package.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+If you use this software in a publication please cite:
+
+>   Santos-Júnior C.D., 2023.
+>   Simgenes: Random gene sequences simulator.
+>   GitHub Repository. Available in: https://github.com/celiosantosjr/simgenes/
+
+Run Macrel online: [https://big-data-biology.org/software/macrel](https://big-data-biology.org/software/macrel)
+
 
 1. [Introduction](#introduction)
 2. [Installing](#install)
@@ -30,7 +44,7 @@ We obtained a file with gene sequences in a length ranging from 30 to 1002 bp,
 with a very even distribution:
 
 <p align="center">
-  <img src="https://github.com/celiosantosjr/simgenes/blob/main/assets/random_gene_length_distribution.svg" alt="drawing" width="450"/>
+  <img src="https://github.com/celiosantosjr/simgenes/blob/main/.assets/random_gene_length_distribution.svg" alt="drawing" width="450"/>
 </p>
 <p align="center">
   <em><b>Fig. 1</b> - Length distribution of generated genes in a simulation.</em>
@@ -40,7 +54,7 @@ Also, the contents of the nucleotides in the genes ranged largely, but yet insid
 internally in the pipeline according to [other authors](https://pubmed.ncbi.nlm.nih.gov/23028785/).
 
 <p align="center">
-  <img src="https://github.com/celiosantosjr/simgenes/blob/main/assets/GC_distribution.svg" alt="drawing" width="450"/>
+  <img src="https://github.com/celiosantosjr/simgenes/blob/main/.assets/GC_distribution.svg" alt="drawing" width="450"/>
 </p>
 <p align="center">
   <em><b>Fig. 2</b> - GC contents distribution in genes from the simulation.</em>
