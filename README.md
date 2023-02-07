@@ -1,6 +1,5 @@
 # Simgenes - Simulate and create random genes
 
-# Table of contents
 1. [Introduction](#introduction)
 2. [Installing](#install)
 3. [Usage](#usage)
@@ -24,19 +23,28 @@ from simgenes import batch_random
 batch_random(ofile='test_check', L=(30,1002), GC=None, transl=False, n=1_000_000)
 ```
 
-The time to generate 1 million gene sequences was ZZZ s, equivalent to say that to each generated
-sequence, simgenes take about XX s to complete the operation.
+The time to generate 1 million gene sequences was 2765 s, equivalent to say that to simgenes can
+generate on average 361.66 sequences per second.
 
 We obtained a file with gene sequences in a length ranging from 30 to 1002 bp,
 with a very even distribution:
 
-![Fig. 1 - Length distribution of generated genes in a simulation.](https://github.com/celiosantosjr/simgenes/blob/[branch]/image.jpg?raw=true)
-![](images/random_gene_length_distribution.svg)
+<p align="center">
+  <img src="https://github.com/celiosantosjr/simgenes/blob/main/assets/random_gene_length_distribution.svg" alt="drawing" width="450"/>
+</p>
+<p align="center">
+  <em><b>Fig. 1</b> - Length distribution of generated genes in a simulation.</em>
+</p>
 
 Also, the contents of the nucleotides in the genes ranged largely, but yet inside the limits established 
 internally in the pipeline according to [other authors](https://pubmed.ncbi.nlm.nih.gov/23028785/).
 
-![Fig. 2 - GC contents distribution in genes from the simulation.](images/GC_distribution.svg)
+<p align="center">
+  <img src="https://github.com/celiosantosjr/simgenes/blob/main/assets/GC_distribution.svg" alt="drawing" width="450"/>
+</p>
+<p align="center">
+  <em><b>Fig. 2</b> - GC contents distribution in genes from the simulation.</em>
+</p>
 
 The 1 million genes generated did not match to any family of Uniprot, and did not cluster under
 cdhit at 95% of identity and 90% of coverage of the shorter sequence. This shows that random genes
@@ -57,9 +65,7 @@ conda activate simgenes
 Then, just install the simgenes:
 
 ```
-git clone https://github.com/celiosantosjr/simgenes
-cd simgenes
-python3 setup.py
+python3 -m pip install simgenes
 ```
 
 ---
@@ -268,6 +274,3 @@ batch_random(ofile='output_testseq',
 ## Contact
 
 If you have any issues or want to contribute to the project, please contact the author [Celio Dias Santos Junior](mailto:celio.diasjunior@gmail.com).
-
-
-
