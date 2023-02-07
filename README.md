@@ -3,7 +3,9 @@
 Pipeline to simulate and create random genes with selected features.
 
 [![Simgenes - Python package](https://github.com/celiosantosjr/simgenes/actions/workflows/python-package.yml/badge.svg)](https://github.com/celiosantosjr/simgenes/actions/workflows/python-package.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+[![https://img.shields.io/pypi/pyversions/Simgenes](https://img.shields.io/pypi/pyversions/Simgenes)](https://img.shields.io/pypi/pyversions/Simgenes)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 If you use this software in a publication please cite:
 
