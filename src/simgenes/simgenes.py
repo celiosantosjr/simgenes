@@ -1,7 +1,9 @@
 import os
+import sys
 import lzma
 import time
 import contextlib
+import logging
 from tqdm import tqdm
 from numpy import log2
 from Bio.Seq import Seq
@@ -9,9 +11,13 @@ from numpy.random import randint
 from collections import Counter
 from random import choices
 
+logging.basicConfig(format='SIMGENES :: %(levelname)s - %(message)s')
 
 def entropy(seq):
-    seq = seq.replace('*', '')
+    if '*' in seq:
+        seq = seq.replace('*', '')
+    if 'X' in seq:
+        seq = seq.replace('X', '')
     df = dict(Counter(seq))
     x = 1 / len(df)
     maxH = len(df)*(x*log2(x))
@@ -21,7 +27,7 @@ def entropy(seq):
         H += (v/s)*log2(v/s)
     if maxH == 0: N=0
     else: N=H/maxH
-    return -H, -maxH, N    
+    return -H, -maxH, N
 
 
 def mtime(L:int) -> float:
@@ -57,14 +63,28 @@ def check_internal_stops(seq: str):
     
 def get_prot(seq: str):
     x = 3 - len(seq)%3
-    seq = seq + 'N'*x
+    if x != 3:
+        seq = seq + 'N'*x
     return str(Seq(seq).translate())
     
 
 def det_props(GC=None):
+    x = [isinstance(GC, float),
+         isinstance(GC, int),
+         GC == None]
+    x = sum(x)     
+    if x == 0:
+        logging.critical('GC content is not set properly')
+        sys.exit()
+    if (GC != None) and (GC > 100):
+        logging.critical('GC content is above 100%')
+        sys.exit() 
+    if (GC != None) and (abs(GC) < 1) and (GC != 0):
+        logging.critical('GC content is under 1%')
+        sys.exit()
     def prop_gen(GC):
         if (GC == None) or (GC == 0):
-            print('WARNING :: Using randomly selected GC')
+            logging.info('Using randomly selected GC')
             GC = randint(214, 749) / 10  # PMID: 23028785
             GC = float(f'{GC:.1f}')
         if GC == -1:
@@ -81,7 +101,7 @@ def det_props(GC=None):
     p = None
     while not p:
         p = prop_gen(GC)
-    print(f'[a = {p[0]:.2f}%, t = {p[1]:.2f}%, c = {p[2]:.2f}%, g = {p[3]:.2f}%]')    
+    logging.info(f'[a = {p[0]:.2f}%, t = {p[1]:.2f}%, c = {p[2]:.2f}%, g = {p[3]:.2f}%]')    
     return p
     
 
@@ -115,7 +135,8 @@ def internal_seq(L, gc):
         rand_seq = format_orf(rand_seq)    
         return rand_seq
     else:
-        print('ERROR :: No sequence')
+        logging.error('Did not generate a sequence')
+        logging.debug('Could not set a seq without internal stops')
         return None    
     
 
@@ -141,17 +162,22 @@ def random_gene(L=None, gc: int = None, trans: bool = False):
     '''
     if isinstance(L, int):
         if (L%3) != 0:
-            print(f'WARNING :: {L} is not divisible by 3')
-            print('WARNING :: Assigning random length')
+            logging.warning(f'Lenght = {L} is not divisible by 3')
+            logging.info('Assigning random length')
             L = None
-    if isinstance(L, tuple) and len(L) == 2:
+    elif isinstance(L, tuple) and len(L) == 2:
         if L[0] < L[1]:
             L = get_len(L[0], L[1])
         else:
+            logging.warning('Reordering your tuple')
+            logging.info(f'L = ({L[1]}, {L[0]})')
             L = get_len(L[1], L[0])
     if L == None:
         L = get_len(300, 900)
-    print(f'WARNING :: Selected L={L}')
+    if not L:
+        logging.critical('Length is not set properly')
+        sys.exit()    
+    logging.info(f'Selected L={L}')
     rand_seq = internal_seq(L, gc)
     if rand_seq and trans:
         return rand_seq, get_prot(rand_seq)
