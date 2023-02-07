@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "Simgenes"
-version = "0.0.2"
+version = "0.0.22"
 authors = [
   { name="Celio D. Santos-Junior", email="celio.diasjunior@gmail.com" },
 ]
