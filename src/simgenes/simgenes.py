@@ -11,6 +11,7 @@ from random import choices
 
 
 def entropy(seq):
+    seq = seq.replace('*', '')
     df = dict(Counter(seq))
     x = 1 / len(df)
     maxH = len(df)*(x*log2(x))
