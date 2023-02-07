@@ -56,6 +56,8 @@ def check_internal_stops(seq: str):
     
     
 def get_prot(seq: str):
+    x = 3 - len(seq)%3
+    seq = seq + 'N'*x
     return str(Seq(seq).translate())
     
 
