@@ -1,5 +1,5 @@
 def test_entropy():
-    from simgenes import entropy
+    from src.simgenes import entropy
     res = {'ATGCTGAGATGAGAGATTT': (1.7990156706551217, 2.0, 0.8995078353275608),
            'AAAAAAAAAAAAAAAAAAA': (-0.0, -0.0, 0),
            'MAKLKHIPQTTTTAHH': (2.952819531114783, 3.169925001442312, 0.9315108495536184),
@@ -10,7 +10,7 @@ def test_entropy():
 
 
 def test_format_orf():
-    from simgenes import format_orf
+    from src.simgenes import format_orf
     seq = 'XXXXXX'
     seq = format_orf(seq)
     a = seq[0:3]
@@ -23,14 +23,14 @@ def test_format_orf():
 
 
 def test_internal_stops():
-    from simgenes import check_internal_stops
+    from src.simgenes import check_internal_stops
     seq = 'ATGAAAAAATAAAAATGATGTTTTCCCCGCTAG'
     stops = check_internal_stops(seq)
     assert [3, 5, 10] == stops
 
 
 def test_prot():    
-    from simgenes import get_prot
+    from src.simgenes import get_prot
     seq = ['', 'ATGTTAA', 'ATGAAATTTAAATAG', 'KKK']
     res = [get_prot(x) for x in seq]
     expect = ['', 'MLX', 'MKFK*', 'X']
@@ -38,14 +38,14 @@ def test_prot():
     
     
 def test_len():
-    from simgenes import get_len
+    from src.simgenes import get_len
     x = get_len(10,1000)
     assert isinstance(x, int)
     assert 10 <= x <= 1000
  
 
 def checkseq(L, gc, trans):
-    from simgenes import random_gene
+    from src.simgenes import random_gene
     s, p = random_gene(L=L, gc=gc, trans=trans)
     if trans:
         assert p != None, 'Did not translate sequence'
@@ -80,7 +80,7 @@ def test_batch():
     import os
     import lzma
     from Bio import SeqIO
-    from simgenes import batch_random
+    from src.simgenes import batch_random
     batch_random(ofile='output_testseq',
                  L=(30, 300),
                  GC=50.8,
