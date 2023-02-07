@@ -25,13 +25,8 @@ If you use this software in a publication please cite:
 ## Introduction
 
 Simulate random gene and protein sequences controlling for real parameters, such as GC content.
-The package simgenes rely on very common libraries:
-
-   - Bio
-   - tqdm
-   - numpy
-
-In a test with 1 million sequences generated using simgenes:
+The package simgenes rely on very common libraries, e.g. biopython, tqdm, and numpy. In a test
+with 1 million sequences generated using simgenes:
 
 ```
 from simgenes import batch_random
@@ -39,11 +34,9 @@ from simgenes import batch_random
 batch_random(ofile='test_check', L=(30,1002), GC=None, transl=False, n=1_000_000)
 ```
 
-The time to generate 1 million gene sequences was 2765 s, equivalent to say that to simgenes can
-generate on average 361.66 sequences per second.
-
-We obtained a file with gene sequences in a length ranging from 30 to 1002 bp,
-with a very even distribution:
+The time to generate 1 million gene sequences was 2765 s, equivalent to say that simgenes can
+generate over 361 sequences per second on average. We obtained a file with gene sequences in
+a length ranging from 30 to 1002 bp, with a very even distribution:
 
 <p align="center">
   <img src="https://github.com/celiosantosjr/simgenes/blob/main/.assets/random_gene_length_distribution.svg" alt="drawing" width="450"/>
@@ -54,6 +47,11 @@ with a very even distribution:
 
 Also, the contents of the nucleotides in the genes ranged largely, but yet inside the limits established 
 internally in the pipeline according to [other authors](https://pubmed.ncbi.nlm.nih.gov/23028785/).
+Another interesting trait is that in side tests with ranging lengths and GC contents, the Spearman's
+correlation between the expected GC content (input to the program) and
+the output sequences was 0.995 (P-value = 0.0) with a residual effect of the length of the final
+sequence (rho = 0.014, P-value=3.95e-07). Meaning that the initial assignment of a GC content is
+effective in the output - Not the case in the current example below illustrated.
 
 <p align="center">
   <img src="https://github.com/celiosantosjr/simgenes/blob/main/.assets/GC_distribution.svg" alt="drawing" width="450"/>
@@ -63,10 +61,16 @@ internally in the pipeline according to [other authors](https://pubmed.ncbi.nlm.
 </p>
 
 The 1 million genes generated did not match to any family of Uniprot, and did not cluster under
-cdhit at 95% of identity and 90% of coverage of the shorter sequence. This shows that random genes
-from simgenes definitely differ from the real genes, being interesting to work as a filter of
-artifacts in gene prediction. This system can easily be used to generate decoy sequences for
-multiple purposes.
+CDHit at 95% of identity and 90% of coverage of the shorter sequence. 
+In an annotation test with [Antifams](https://www.ebi.ac.uk/research/bateman/software/antifam-tool-identify-spurious-proteins),
+we obtained none of these 1 million random sequences matching to that database,
+which suggests no homology to spurious predictions so far reported. 
+
+This system can easily be used to generate decoy sequences for multiple purposes.
+Our results suggest that random genes from simgenes definitely differ from the annotated genes,
+and well-known spurious predictions, being interesting to works involving filters of
+artifactual gene predictions. 
+
 
 ---
 ## Install
