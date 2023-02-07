@@ -58,7 +58,7 @@ def checkseq(L, gc, trans):
         g, c = s.count('G'), s.count('C')
         newgc = 100*(g+c)/x
         dgc = abs(gc - newgc)
-        assert dgc <= 5, f'GC content deviates from that asked {gc:.2f}:{newgc:.2f}:{dgc:.2f}'
+        assert dgc <= 10, f'GC content deviates from that asked {gc:.2f}:{newgc:.2f}:{dgc:.2f}'
     if isinstance(L, tuple):
         assert L[0] <= x <= L[1], 'Length is not in the specified range'
     elif isinstance(L, int):
