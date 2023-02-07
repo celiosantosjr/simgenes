@@ -19,7 +19,9 @@ def entropy(seq):
     H = 0
     for _, v in df.items():
         H += (v/s)*log2(v/s)
-    return -H, -maxH, H/maxH
+    if maxH == 0: N=0
+    else: N=H/maxH
+    return -H, -maxH, N    
 
 
 def mtime(L:int) -> float:
