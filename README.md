@@ -11,8 +11,8 @@ If you use this software in a publication please cite:
 >   Simgenes: Random gene sequences simulator.
 >   GitHub Repository. Available in: https://github.com/celiosantosjr/simgenes/
 
-Run Macrel online: [https://big-data-biology.org/software/macrel](https://big-data-biology.org/software/macrel)
-
+---
+## Table of contents
 
 1. [Introduction](#introduction)
 2. [Installing](#install)
